@@ -10,7 +10,10 @@
   $.getJSON("groceryData.json", function (data) {
   	rawData = data;
   });
-  document.write(rawData[0].Chain);
+
+  var test = jQuery.parseJSON(rawData[0].Chain);
+  document.write(test);
+
   </script>
 </body>
 </html>
