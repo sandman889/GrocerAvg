@@ -6,14 +6,16 @@
 </head>
 <body>
   <script>
-  var rawData= [];
-  $.getJSON("groceryData.json", function (data) {
-  	rawData = data;
-  	console.log("JSON file loaded");
+  $.getJSON( "ajax/test.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+  items.push( "<li id='" + key + "'>" + val + "</li>" );
   });
-
-  var test = jQuery.parseJSON(rawData[0].Chain);
-  document.write(test);
+  $( "<ul/>", {
+  "class": "my-new-list",
+  html: items.join( "" )
+  }).appendTo( "body" );
+  });
 
   </script>
 </body>
