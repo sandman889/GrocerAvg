@@ -9,6 +9,7 @@
   var rawData= [];
   $.getJSON("groceryData.json", function (data) {
   	rawData = data;
+  	console.log("JSON file loaded");
   });
 
   var test = jQuery.parseJSON(rawData[0].Chain);
