@@ -7,9 +7,11 @@
   <script>
   var data = null;
   d3.json("grocerData.json", function(error, json) {
-  	if (error) console.warn("error loading json");
-  	data = json;
-  	console.log(data[1].Chain);
+  	if (error) { console.warn("error loading json"); }
+	else {
+  		data = json;
+  		console.log(data[1].Chain);
+	}
   });
 
   </script>
