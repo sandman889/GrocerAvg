@@ -5,67 +5,36 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 </head>
 <body>
-  <svg id="svg" width="500" height="500"> </svg>
+  <svg id="svg" width="1000" height="1000"> </svg>
   <script>
-  	var sampleData = [{
-  "t": 1,
-  "y": 5
-}, {
-  "t": 20,
-  "y": 20
-}, {
-  "t": 40,
-  "y": 10
-}, {
-  "t": 60,
-  "y": 40
-}, {
-  "t": 80,
-  "y": 5
-}, {
-  "t": 100,
-  "y": 60
-}];
-        var vis = d3.select("#svg");
-        var xRange = d3.scale.linear()
-        	.range([40, 400])
-        	.domain([d3.min(sampleData, function(d) {
-        		return (d.t);
-        	}), d3.max(sampleData, function(d) {
-        		return d.t;
-        	})]);
 
-        var yRange = d3.scale.linear()
-        	.range([400, 40])
-        	.domain([d3.min(sampleData, function(d) {
-        		return (d.y);
-        	}), d3.max(sampleData, function(d) {
-        		return d.y;
-        	})]);
+  d3.csv('groceryData.csv', function(error, data) {
 
-        var xAxis = d3.svg.axis().scale(xRange);
-        var yAxis = d3.svg.axis().scale(yRange).orient("left");
-        vis.append("svg:g").call(xAxis).attr("transform", "translate(0,400)");
-        vis.append("svg:g").call(yAxis).attr("transform", "translate(40,0)");
+  	var maxRatio = 0;
+  	for (elem in data) {
+  		var temp = (elem.Income.parseInt()/ elem.PurchaseAmount.parseInt()) / elem.FamilySize.parseInt();
+  		if (temp > maxRatio) {
+  			maxRatio = temp;
+  			temp = 0;
+  		}
+  	}
 
-        var circles = vis.selectAll("circle").data(sampleData);
-
-        circles
-        	.enter()
-        	.insert("circle")
-        	.attr("cx", function(d) { return xRange (d.t); })
-        	.attr("cy", function(d) { return yRange (d.y); })
-        	.attr("r", 10)
-        	.style("fill", "red");
+  });
 
 
 
 
-  //var dataset = []; 
- // d3.csv("groceryData.csv", function(csv) {
-  	//dataset = csv;
 
-  //});
+  	/*
+  	var width = 1000, height = 1000;
+  	var fill = d3.scale.ordinal()
+  		.domain(["low", "medium", "high"])
+  		.range(["#d84b2a", "#beccae", "#7aa25c"])
+
+  	var svg = d3.select("#svg").attr("width", width).attr("heigh", height);
+  	var max = d3.max(data, function(d) { return parseInt(d.s)})
+
+  })*/
 
   </script>
 </body>
