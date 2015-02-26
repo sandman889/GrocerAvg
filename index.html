@@ -7,29 +7,36 @@
   <meta charset="UTF-8">
 </head>
 <body>
-	<div id="parcoords"> </div>
+	<div id="example" class="parcoords" style="width:2000px;height:1000px"></div>
   	<script>
   		//create color scale
   		var colorScale = d3.scale.linear()
   			.domain([9, 50])
-  			.range(["green, black"])
+  			.range(["green", "black"])
   			.interpolate(d3.interpolateLab);
 
-		var parc = null;
+		//var parc  null;
   		var data = null;
 
   		d3.json("grocerData.json", function(error, json) {
   			if (error) { console.warn("error loading json"); }
 			else {
   				data = json;
-  				parc = d3.parcoords()("#parcoords")
+  				var pc = d3.parcoords()("#example")
+  					.data(data)
+  					.color(function(d) { return colorScale(d['Income']); })
+  					.render()
+  					.ticks(3)
+  					.createAxes()
+
+  				/*parc = d3.parcoords()("#parcoords")
   					.data(data)
   					.composite("darker")
-  					.color(function (d) { return colorScale(d['Income']); })
+  					.color(function (d) { return colorScale(d['Chain']); })
   					.alpha(0.35)
   					.render()
-  					.brushMode("1D-axes")
-  					.interactive()
+  					.ticks(3)
+  					.createAxes()
 
   				var exploreCount = 0;
   				var exploring = {};
@@ -67,7 +74,7 @@
   							})
   						);
   					};
-  				};
+  				};*/
 			};
   		});
 
