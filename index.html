@@ -24,12 +24,11 @@
   				data = json;
   				parc = d3.parcoords()("#parcoords")
   					.data(data)
-  					.hideAxis(["name"])
   					.composite("darker")
   					.color(function (d) { return colorScale(d['Income']); })
   					.alpha(0.35)
   					.render()
-  					.brushMode("1d-axes")
+  					.brushMode("1D-axes")
   					.interactive()
 
   				var exploreCount = 0;
