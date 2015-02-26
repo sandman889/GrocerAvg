@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<html>
+<! DOCTYPE html>
 <head>
   <title> Customer Averages </title>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -15,46 +14,5 @@
 
   </script>
 </body>
-=======
-<html>
-<head>
-  <title> Customer Averages </title>
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-</head>
-<body>
-  <svg id="svg" width="1000" height="1000"> </svg>
-  <script>
 
-  d3.csv('groceryData.csv', function(error, data) {
-
-  	var maxRatio = 0;
-  	for (elem in data) {
-  		var temp = (elem.Income.parseInt()/ elem.PurchaseAmount.parseInt()) / elem.FamilySize.parseInt();
-  		if (temp > maxRatio) {
-  			maxRatio = temp;
-  			temp = 0;
-  		}
-  	}
-
-  });
-
-
-
-
-
-  	/*
-  	var width = 1000, height = 1000;
-  	var fill = d3.scale.ordinal()
-  		.domain(["low", "medium", "high"])
-  		.range(["#d84b2a", "#beccae", "#7aa25c"])
-
-  	var svg = d3.select("#svg").attr("width", width).attr("heigh", height);
-  	var max = d3.max(data, function(d) { return parseInt(d.s)})
-
-  })*/
-
-  </script>
-</body>
->>>>>>> 2e96953b5b330e468f3e7fbcfa9fd74ad8fe4734
 </html>
