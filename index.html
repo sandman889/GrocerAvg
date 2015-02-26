@@ -3,46 +3,43 @@
   <title> Customer Averages </title>
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="d3.parcoords.js" type="text/javascript"> </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel=stylesheet type="text/css" href="d3.parcoords.css">
   <meta charset="UTF-8">
 </head>
 <body>
-	<div id="example" class="parcoords" style="width:2000px;height:1000px"></div>
+	<div id="parcoords" class="parcoords" style="width:2000px;height:1000px"></div>
   	<script>
   		//create color scale
   		var colorScale = d3.scale.linear()
-  			.domain([9, 50])
-  			.range(["green", "black"])
+  			.domain([0, 100000])
+  			.range(["green", "yellow"])
   			.interpolate(d3.interpolateLab);
 
-		//var parc  null;
   		var data = null;
-
+  		var pc;
   		d3.json("grocerData.json", function(error, json) {
   			if (error) { console.warn("error loading json"); }
 			else {
   				data = json;
-  				var pc = d3.parcoords()("#example")
+  				pc = d3.parcoords()("#parcoords")
   					.data(data)
+  					.hideAxis(["Gender"])
+  					.hideAxis(["PaymentMethod"])
+  					.hideAxis(["Age"])
   					.color(function(d) { return colorScale(d['Income']); })
-  					.render()
-  					.ticks(3)
-  					.createAxes()
-
-  				/*parc = d3.parcoords()("#parcoords")
-  					.data(data)
-  					.composite("darker")
-  					.color(function (d) { return colorScale(d['Chain']); })
   					.alpha(0.35)
   					.render()
-  					.ticks(3)
+  					.ticks(10)
   					.createAxes()
+  					.brushMode("1D-axes")
+  					.interactive()
 
   				var exploreCount = 0;
   				var exploring = {};
   				var exploreStart = false;
 
-  				parc.svg
+  				pc.svg
   					.selectAll(".dimension")
   					.style("cursor", "pointer")
   					.on("click", function(d) {
@@ -54,27 +51,27 @@
   				function explore(dimension, count) {
   					if(!exploreStart) {
   						exploreStart = true;
-  						d3.timer(parc.brush);
+  						d3.timer(pc.brush);
   					}
 
   					var speed = (Math.round(Math.random()) ? 1 : -1) * (Math.random()+0.5);
 
   					return function(t) {
   						if(!exploring[dimension]) return true;
-  						var domain = parc.yscale[dimension].domain();
+  						var domain = pc.yscale[dimension].domain();
   						var width = (domain[1] - domain[0])/4;
   						var center = width*1.5*(1+Math.sin(speed*t/1200)) + domain[0];
 
-  						parc.yscale[dimension].brush.extent([
+  						pc.yscale[dimension].brush.extent([
   							d3.max([center-width*0.01, domain[0]-width/400]),
   							d3.min([center+width*1.01, domain[1]+width/100])
-  						])(pc1.g()
+  						])(pc.g()
   							.filter(function(d) {
   								return d == dimension;
   							})
   						);
   					};
-  				};*/
+  				};
 			};
   		});
 
