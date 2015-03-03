@@ -18,10 +18,13 @@
 
   		var data = null;
   		var pc;
+  		//pull the data from the JSON file on the server
   		d3.json("grocerData.json", function(error, json) {
   			if (error) { console.warn("error loading json"); }
 			else {
   				data = json;
+  				//this uses the parcoords javascript library
+  				//to generate the graph with the ncessary functions
   				pc = d3.parcoords()("#parcoords")
   					.data(data)
   					.hideAxis(["Gender"])
@@ -39,6 +42,8 @@
   				var exploring = {};
   				var exploreStart = false;
 
+  				//the following function and this object method call involve the drag and drop functionality
+  				//of the graph so you may better explore the data
   				pc.svg
   					.selectAll(".dimension")
   					.style("cursor", "pointer")
